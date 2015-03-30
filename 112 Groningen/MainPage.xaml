@@ -1,0 +1,105 @@
+﻿<Page
+    x:Class="_112_Groningen.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:_112_Groningen"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:_112_Groningen.Data"
+    mc:Ignorable="d"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    Background="#FFDCE7F3">
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <CommonNavigationTransitionInfo IsStaggeringEnabled="True"/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Image HorizontalAlignment="Stretch" Source="/Assets/112groningen-logo.png"/>
+        <ListView
+            Grid.Row="1"
+                    x:Name="NewsLV"
+                    ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel HorizontalAlignment="Stretch" Background="White" >
+                        <Grid Background="#FFDCE7F3">
+                            <TextBlock
+                                        Margin="9,0,19,0"
+                                    Text="{Binding Header}"
+                                    TextWrapping="Wrap"
+                                    Pivot.SlideInAnimationGroup="1"
+                                    CommonNavigationTransitionInfo.IsStaggerElement="True"
+                                    FontSize="25"
+                                    Foreground="#FF07519A" FontWeight="Bold"/>
+                        </Grid>
+                        <ListView
+                                    Margin="0,0,0,5"
+                                    ItemsSource="{Binding Articles}"
+                    IsItemClickEnabled="True"
+                    ItemClick="ListView_ItemClick"
+                    ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/Assets/NewsLogo.png" Margin="2,0,0,0" Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Height="30" Width="30"/>
+
+
+
+                                        <TextBlock Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Text="{Binding Title}" TextWrapping="WrapWholeWords"
+                                    Pivot.SlideInAnimationGroup="1" CommonNavigationTransitionInfo.IsStaggerElement="True"
+                                    Foreground="#FF07519A" FontSize="18" Margin="4,0,0,0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar Background="#FFDCE7F3" Foreground="#FF07519A">
+            <AppBarButton x:Uid="GroningenButton" x:Name="GroningenButton" Label="Website" Icon="World" Click="GroningenButton_Click" />
+            <AppBarButton x:Uid="RefreshButton" x:Name="RefreshButton" Label="Vernieuwen" Icon="Refresh" Click="RefreshButton_Click" />
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="PrivacyPolicyButton" x:Name="PrivacyPolicyButton" Label="Privacy policy"  Click="PrivacyPolicyButton_Click"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
