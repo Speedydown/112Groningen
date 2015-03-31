@@ -7,9 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    DataContext="{Binding DefaultViewModel.Item, RelativeSource={RelativeSource Self}}"
-    d:DataContext="{Binding Groups[0].Items[0], Source={d:DesignData Source=/DataModel/SampleData.json, Type=data:SampleDataSource}}"
-    Background="LightGray">
+    Background="#FF597EAA">
 
     <Grid>
         <ScrollViewer x:Name="ContentScrollViewer" VerticalScrollMode="Auto">
@@ -34,7 +32,7 @@
 
                 <Grid Grid.Row="0">
                     <ProgressBar Grid.Row="1" Margin="0,2,0,0" IsIndeterminate="True" x:Name="LoadingBar" HorizontalAlignment="Stretch"/>
-                    <TextBlock Text="{Binding Title}" Margin="4,0" Foreground="Black" FontSize="35" FontWeight="Bold" TextWrapping="WrapWholeWords" />
+                    <TextBlock Text="{Binding Title}" Margin="4,0" Foreground="#FF597EAA" FontSize="35" FontWeight="Bold" TextWrapping="WrapWholeWords" />
                 </Grid>
                 <Grid  Grid.Row="2" Margin="4,15,4,5">
                     <ListView ItemsSource="{Binding Content}">

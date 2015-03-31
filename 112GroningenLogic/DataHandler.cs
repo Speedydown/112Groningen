@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WebCrawlerTools;
 using Windows.Foundation;
 
 namespace _112GroningenLogic
@@ -16,6 +17,11 @@ namespace _112GroningenLogic
         public static IAsyncOperation<Article> GetArticleByURL(string URL)
         {
             return ArticleHandler.Instance.GetArticleFromURL(URL).AsAsyncOperation();
+        }
+
+        public static IAsyncAction PostArticle(string URL)
+        {
+            return HTTPGetUtil.GetDataAsStringFromURL(URL).AsAsyncAction();
         }
     }
 }

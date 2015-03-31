@@ -1,41 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-
-  <Identity Name="4e5030bb-ffa4-432e-8ab4-f93a5e9839b8"
-            Publisher="CN=Teake"
-            Version="1.0.0.0" />
-
-  <mp:PhoneIdentity PhoneProductId="4e5030bb-ffa4-432e-8ab4-f93a5e9839b8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
-
+  <Identity Name="52891Speedydown.112Groningen" Publisher="CN=66C50CC1-FBB4-401C-87F4-C13E4975CFAE" Version="1.1.0.3" />
+  <mp:PhoneIdentity PhoneProductId="022c93d7-4212-4365-a40d-06c3ece05e03" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>112 Groningen</DisplayName>
-    <PublisherDisplayName>Teake</PublisherDisplayName>
+    <DisplayName>112Groningen</DisplayName>
+    <PublisherDisplayName>Speedydown</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
-
   <Prerequisites>
     <OSMinVersion>6.3.1</OSMinVersion>
     <OSMaxVersionTested>6.3.1</OSMaxVersionTested>
   </Prerequisites>
-  
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="x-generate" />
   </Resources>
-
   <Applications>
-    <Application Id="App"
-        Executable="$targetnametoken$.exe"
-        EntryPoint="_112_Groningen.App">
-        <m3:VisualElements
-            DisplayName="112 Groningen"
-            Square150x150Logo="Assets\Logo.png"
-            Square44x44Logo="Assets\SmallLogo.png"
-            Description="112 Groningen"
-            ForegroundText="light"
-            BackgroundColor="transparent">
-            <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png"/>
-            <m3:SplashScreen Image="Assets\SplashScreen.png"/>
-        </m3:VisualElements>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="_112_Groningen.App">
+      <m3:VisualElements DisplayName="112Groningen" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="112 Groningen" ForegroundText="light" BackgroundColor="transparent">
+        <m3:LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
+        <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png">
+        </m3:DefaultTile>
+        <m3:SplashScreen Image="Assets\SplashScreen.png" />
+      </m3:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="_112GroningenLogic.BackgroundTask">
+          <BackgroundTasks>
+            <Task Type="timer" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>

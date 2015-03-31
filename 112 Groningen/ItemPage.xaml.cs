@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -91,6 +92,7 @@ namespace _112_Groningen
             }
 
             LoadingBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            Task t = Task.Run(() => Datahandler.PostArticle("http://speedydown-001-site2.smarterasp.net/api.ashx?Groningen=" + URL));
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)

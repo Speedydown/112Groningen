@@ -7,11 +7,14 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.Storage;
 using Windows.System;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,11 +28,13 @@ namespace _112_Groningen
     public sealed partial class MainPage : Page
     {
         private static DateTime? LastLoadedDT = null;
+        public static MainPage Instance { get; private set; }
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
 
         public MainPage()
         {
+            Instance = this;
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
@@ -51,8 +56,63 @@ namespace _112_Groningen
 
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            List<NewsDay> News = (List<NewsDay>)await Datahandler.GetRegionalNews();
-            NewsLV.ItemsSource = News;
+            this.HandleData();
+        }
+
+        public async Task HandleData(bool OverrideTimer = false)
+        {
+            DataProgressBar.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+            if (OverrideTimer)
+            {
+                LastLoadedDT = DateTime.Now.AddHours(-1);
+            }
+
+            TileUpdateManager.CreateTileUpdaterForApplication().Clear();
+            BadgeUpdateManager.CreateBadgeUpdaterForApplication().Clear();
+            this.NoInternetGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            this.NewsLV.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+            if (LastLoadedDT == null || DateTime.Now.Subtract((DateTime)LastLoadedDT).TotalMinutes > 5)
+            {
+                try
+                {
+                    List<NewsDay> News = (List<NewsDay>)await Datahandler.GetRegionalNews();
+
+                    if (News.Count == 0)
+                    {
+                        throw new Exception("No items");
+                    }
+
+                    NewsLV.ItemsSource = News;
+
+                    if (LastLoadedDT == null)
+                    {
+                        NotificationHandler.Run();
+                    }
+
+                    ApplicationData applicationData = ApplicationData.Current;
+                    ApplicationDataContainer localSettings = applicationData.LocalSettings;
+
+                    try
+                    {
+                        localSettings.Values["LastNewsItem"] = News.First().Articles.First().URL;
+                    }
+                    catch
+                    {
+
+                    }
+
+                    LastLoadedDT = DateTime.Now;
+                }
+                catch (Exception)
+                {
+                    this.NewsLV.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    this.NoInternetGrid.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                }
+            }
+
+            DataProgressBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -105,9 +165,13 @@ namespace _112_Groningen
             await Launcher.LaunchUriAsync(new Uri("http://wiezitwaarvandaag.nl/privacypolicy.aspx"));
         }
 
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        private async void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.RefreshButton.IsEnabled = false;
+            this.NewsLV.ItemsSource = null;
+            LastLoadedDT = null;
+            await this.HandleData();
+            this.RefreshButton.IsEnabled = true;
         }
     }
 }

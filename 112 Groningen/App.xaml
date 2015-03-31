@@ -4,4 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:_112_Groningen">
 
+    <Application.Resources>
+        <x:String x:Key="ProgressBarIndeterminateForegroundThemeBrush">#FF597EAA</x:String>
+    </Application.Resources>
 </Application>

@@ -63,7 +63,7 @@ namespace _112_Groningen
         {
             if (command.Label == "Review")
             {
-                //Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + "a18b206e-3c35-487c-993e-1a2dc7eb4238"));
+                Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + "2547c1d0-9568-4b37-bcf0-35695783caf5"));
             }
         }
     }

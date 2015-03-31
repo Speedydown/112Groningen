@@ -82,6 +82,12 @@ namespace _112GroningenLogic
 
         private string CleanContent(string Content)
         {
+            if (Content.Contains("<strong>"))
+            {
+                Content = Content.Insert(Content.IndexOf("<strong>"), "\n\n");
+            }
+            
+
             Content = HTMLParserUtil.CleanHTMLString(Content);
             Content = Content.Replace("<p>", "");
             Content = Content.Replace("</p>", "");
@@ -100,7 +106,14 @@ namespace _112GroningenLogic
                     {
                         if (Content.Contains("<"))
                         {
-                            TransFormedContent += HTMLParserUtil.GetContentAndSubstringInput(">", "<", Content, out Content);
+                            if (!(TransFormedContent.Last() == '\n'))
+                            {
+                                TransFormedContent += HTMLParserUtil.GetContentAndSubstringInput(">", "<", Content, out Content).Trim() + "\n";
+                            }
+                            else
+                            {
+                                TransFormedContent += HTMLParserUtil.GetContentAndSubstringInput(">", "<", Content, out Content);
+                            }
                         }
                         else
                         {
