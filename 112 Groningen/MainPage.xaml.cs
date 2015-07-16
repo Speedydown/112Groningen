@@ -61,7 +61,8 @@ namespace _112_Groningen
 
         public async Task HandleData(bool OverrideTimer = false)
         {
-            DataProgressBar.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            LoadingControl.DisplayLoadingError(false);
+            LoadingControl.SetLoadingStatus(true);
 
             if (OverrideTimer)
             {
@@ -70,7 +71,6 @@ namespace _112_Groningen
 
             TileUpdateManager.CreateTileUpdaterForApplication().Clear();
             BadgeUpdateManager.CreateBadgeUpdaterForApplication().Clear();
-            this.NoInternetGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             this.NewsLV.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
             if (LastLoadedDT == null || DateTime.Now.Subtract((DateTime)LastLoadedDT).TotalMinutes > 5)
@@ -107,12 +107,11 @@ namespace _112_Groningen
                 }
                 catch (Exception)
                 {
-                    this.NewsLV.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                    this.NoInternetGrid.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    LoadingControl.DisplayLoadingError(true);
                 }
             }
 
-            DataProgressBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            LoadingControl.SetLoadingStatus(false);
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -155,9 +154,9 @@ namespace _112_Groningen
             }
         }
 
-        private void GroningenButton_Click(object sender, RoutedEventArgs e)
+        private async void GroningenButton_Click(object sender, RoutedEventArgs e)
         {
-
+            await Launcher.LaunchUriAsync(new Uri("http://112groningen.nl"));
         }
 
         private async void PrivacyPolicyButton_Click(object sender, RoutedEventArgs e)

@@ -52,14 +52,7 @@ namespace _112_Groningen
 
         private void CheckGoBack()
         {
-            if (this.FullsizeImage)
-            {
-                this.FullsizeImage = false;
-                ContentScrollViewer.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                FullImage.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                FullImageScrollViewer.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            }
-            else
+            if (NewsItemControl.CanGoBack())
             {
                 NavigationHelper.GoBack();
             }
@@ -77,22 +70,34 @@ namespace _112_Groningen
 
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            ErrorGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            string URL = (string)e.NavigationParameter;
-
             try
             {
-                Article article = await Datahandler.GetArticleByURL(URL);
-                LayoutRoot.DataContext = article;
-                ArticleCounter.AddArticleCount();
+                LoadingControl.SetLoadingStatus(true);
+
+                if (e.NavigationParameter != null)
+                {
+                    Article article = await Datahandler.GetArticleByURL((string)e.NavigationParameter);
+                    this.DataContext = article;
+                }
+                else
+                {
+                    LoadingControl.DisplayLoadingError(true);
+                }
             }
-            catch (Exception)
+            catch
             {
-                ErrorGrid.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                LoadingControl.DisplayLoadingError(true);
+            }
+            finally
+            {
+                LoadingControl.SetLoadingStatus(false);
             }
 
-            LoadingBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            Task t = Task.Run(() => Datahandler.PostArticle("http://speedydown-001-site2.smarterasp.net/api.ashx?Groningen=" + URL));
+            ArticleCounter.AddArticleCount();
+            if (e.NavigationParameter != null)
+            {
+                Task t = Task.Run(() => Datahandler.PostArticle("http://speedydown-001-site2.smarterasp.net/api.ashx?Groningen=" + (string)e.NavigationParameter));
+            }
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -112,22 +117,6 @@ namespace _112_Groningen
 
         #endregion
 
-        private void ImagesListview_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            this.FullsizeImage = true;
-            ContentScrollViewer.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            FullImage.Source = new BitmapImage(new Uri(e.ClickedItem as string));
-            FullImageScrollViewer.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            FullImage.Visibility = Windows.UI.Xaml.Visibility.Visible;
-        }
-
-        private void FullImage_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            this.FullsizeImage = false;
-            ContentScrollViewer.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            FullImage.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            FullImageScrollViewer.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-        }
     }
 }
 

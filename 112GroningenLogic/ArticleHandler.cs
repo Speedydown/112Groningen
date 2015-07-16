@@ -62,6 +62,17 @@ namespace _112GroningenLogic
                 }
             }
 
+            string Youtube = "";
+
+            try
+            {
+                Youtube = "https://www.youtube.com/embed/" + HTMLParserUtil.GetContentAndSubstringInput("https://www.youtube.com/embed/", "\" frameborder", Source, out Source);
+            }
+            catch
+            {
+
+            }
+
             Source = this.StripHeader(Source, "<div id=\"artikel_fotos\">");
 
             while (true)
@@ -76,7 +87,9 @@ namespace _112GroningenLogic
                 }
             }
 
-            return new Article(Header, Author, Location, Content, Images);
+            string[] SplittedTimeStamp = Author.Split(',');
+
+            return new Article(Header, SplittedTimeStamp.First(), SplittedTimeStamp.Last(), Location, Content, Images, Youtube);
 
         }
 
@@ -86,7 +99,7 @@ namespace _112GroningenLogic
             {
                 Content = Content.Insert(Content.IndexOf("<strong>"), "\n\n");
             }
-            
+
 
             Content = HTMLParserUtil.CleanHTMLString(Content);
             Content = Content.Replace("<p>", "");
@@ -141,7 +154,14 @@ namespace _112GroningenLogic
                 TransFormedContent = Temp;
             }
 
-            return TransFormedContent.Trim();
+            TransFormedContent = TransFormedContent.Trim().Replace("      ", "\n\n").Replace("\r", "").Replace("\n ", "\n\n").Replace(".\n", "\n\n");
+
+            while (TransFormedContent.Contains("\n\n\n"))
+            {
+                TransFormedContent = TransFormedContent.Replace("\n\n\n", "\n\n");
+            }
+
+            return TransFormedContent;
         }
     }
 }

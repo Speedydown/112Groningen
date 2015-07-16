@@ -148,6 +148,14 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Speedydown.nl-API\WRCHelperLibrary\WRCHelperLibrary.csproj">
+      <Project>{6f1a5ac4-c4ad-49c8-b37b-c541e09d5742}</Project>
+      <Name>WRCHelperLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Speedydown.nl-API\XamlControlLibrary\XamlControlLibrary.csproj">
+      <Project>{09f3efe7-ac3c-4189-90f1-c7bf9e01af96}</Project>
+      <Name>XamlControlLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\112GroningenLogic\112GroningenLogic.csproj">
       <Project>{a055214e-2f67-4f68-b022-e454ba93dd15}</Project>
       <Name>112GroningenLogic</Name>
