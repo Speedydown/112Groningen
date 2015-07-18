@@ -29,7 +29,7 @@ namespace _112_Groningen
 
             if (Counter == 25)
             {
-                ShowRateDialog();
+                Task t = ShowRateDialog();
             }
         }
 
@@ -59,11 +59,11 @@ namespace _112_Groningen
         }
 
 
-        private static void CommandInvokedHandler(IUICommand command)
+        private async static void CommandInvokedHandler(IUICommand command)
         {
             if (command.Label == "Review")
             {
-                Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + "2547c1d0-9568-4b37-bcf0-35695783caf5"));
+                await Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + "2547c1d0-9568-4b37-bcf0-35695783caf5"));
             }
         }
     }

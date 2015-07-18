@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -35,7 +36,7 @@ namespace _112_Groningen
 
             if (MainPage.Instance != null)
             {
-                MainPage.Instance.HandleData(true);
+                Task t = MainPage.Instance.HandleData(true);
             }
 
             // Do not repeat app initialization when the Window already has content,

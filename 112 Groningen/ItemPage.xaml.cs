@@ -29,8 +29,6 @@ namespace _112_Groningen
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        private bool FullsizeImage = false;
-
         public ItemPage()
         {
             this.InitializeComponent();

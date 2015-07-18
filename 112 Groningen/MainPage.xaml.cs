@@ -56,7 +56,7 @@ namespace _112_Groningen
 
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            this.HandleData();
+            await this.HandleData();
         }
 
         public async Task HandleData(bool OverrideTimer = false)
