@@ -63,11 +63,12 @@ namespace _112GroningenLogic
             }
         }
 
+        private Thickness _ContentMargins = new Thickness(4, 15, 4, 5);
         public Thickness ContentMargins
         {
             get
             {
-                return new Thickness(4, 15, 4, 5);
+                return _ContentMargins;
             }
         }
 
@@ -98,6 +99,10 @@ namespace _112GroningenLogic
             {
                 this.ContentSummary = Body.First();
                 Body.RemoveAt(0);
+            }
+            else
+            {
+                _ContentMargins = new Thickness(4, -20, 4, 5);
             }
 
             this.Body = Body;

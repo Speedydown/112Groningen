@@ -11,11 +11,6 @@ namespace _112GroningenLogic
     {
         public readonly static ArticleHandler Instance = new ArticleHandler();
 
-        private ArticleHandler()
-        {
-
-        }
-
         public async Task<Article> GetArticleFromURL(string URL)
         {
             try
@@ -54,7 +49,12 @@ namespace _112GroningenLogic
             {
                 try
                 {
-                    Content.Add(this.CleanContent(HTMLParserUtil.GetContentAndSubstringInput("<div class=\"artikel_tekst\">", "</div>", Source, out Source)));
+                    string NewsParagraph = this.CleanContent(HTMLParserUtil.GetContentAndSubstringInput("<div class=\"artikel_tekst\">", "</div>", Source, out Source));
+
+                    if (NewsParagraph.Length > 0)
+                    {
+                        Content.Add(NewsParagraph);
+                    }
                 }
                 catch (Exception)
                 {
@@ -90,7 +90,6 @@ namespace _112GroningenLogic
             string[] SplittedTimeStamp = Author.Split(',');
 
             return new Article(Header, SplittedTimeStamp.First(), SplittedTimeStamp.Last(), Location, Content, Images, Youtube);
-
         }
 
         private string CleanContent(string Content)
@@ -100,68 +99,13 @@ namespace _112GroningenLogic
                 Content = Content.Insert(Content.IndexOf("<strong>"), "\n\n");
             }
 
-
             Content = HTMLParserUtil.CleanHTMLString(Content);
-            Content = Content.Replace("<p>", "");
-            Content = Content.Replace("</p>", "");
-            Content = Content.Replace(";", "");
+            Content = HTMLParserUtil.CleanHTMLTagsFromString(Content);
+            Content = HTMLParserUtil.CleanHTTPTagsFromInput(Content);
+            Content = Content.Trim().Replace("      ", "\n\n").Replace("\n ", "\n\n").Replace(".\n", "\n\n");
+            Content = HTMLParserUtil.CleanDoubleBreakLinesFromInput(Content);
 
-            string TransFormedContent = string.Empty;
-
-            try
-            {
-                TransFormedContent += Content.Substring(0, Content.IndexOf("<"));
-                Content = Content.Substring(Content.IndexOf("<") + 1);
-
-                while (true)
-                {
-                    try
-                    {
-                        if (Content.Contains("<"))
-                        {
-                            if (!(TransFormedContent.Last() == '\n'))
-                            {
-                                TransFormedContent += HTMLParserUtil.GetContentAndSubstringInput(">", "<", Content, out Content).Trim() + "\n";
-                            }
-                            else
-                            {
-                                TransFormedContent += HTMLParserUtil.GetContentAndSubstringInput(">", "<", Content, out Content);
-                            }
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        TransFormedContent += Content;
-                        break;
-                    }
-                }
-            }
-
-            catch
-            {
-                TransFormedContent += Content;
-            }
-
-            while (TransFormedContent.Contains("http"))
-            {
-                string Temp = TransFormedContent.Substring(0, TransFormedContent.IndexOf("http"));
-                string TailOfArticle = TransFormedContent.Substring(TransFormedContent.IndexOf("http"));
-                Temp += TailOfArticle.Substring(TailOfArticle.IndexOf(" "));
-                TransFormedContent = Temp;
-            }
-
-            TransFormedContent = TransFormedContent.Trim().Replace("      ", "\n\n").Replace("\r", "").Replace("\n ", "\n\n").Replace(".\n", "\n\n");
-
-            while (TransFormedContent.Contains("\n\n\n"))
-            {
-                TransFormedContent = TransFormedContent.Replace("\n\n\n", "\n\n");
-            }
-
-            return TransFormedContent;
+            return Content;
         }
     }
 }

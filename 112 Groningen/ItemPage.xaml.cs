@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WebCrawlerTools;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
@@ -23,6 +24,7 @@ namespace _112_Groningen
 {
     public sealed partial class ItemPage : Page
     {
+        private string CurrentURL = string.Empty;
         RelayCommand _checkedGoBackCommand;
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -76,6 +78,7 @@ namespace _112_Groningen
 
                 if (e.NavigationParameter != null)
                 {
+                    CurrentURL = (string)e.NavigationParameter;
                     Article article = await Datahandler.GetArticleByURL((string)e.NavigationParameter);
                     this.DataContext = article;
                 }
@@ -116,6 +119,11 @@ namespace _112_Groningen
         }
 
         #endregion
+
+        private void ShareButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShareToolkit.ShareContentAsString(CurrentURL, "Gedeeld met 112Groningen voor Windows Phone", string.Empty);
+        }
 
     }
 }
