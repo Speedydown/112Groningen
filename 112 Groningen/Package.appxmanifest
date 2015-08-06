@@ -23,7 +23,7 @@
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
       </m3:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="_112GroningenLogic.BackgroundTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="_112GroningenBackGroundTaskWP.BackgroundTask">
           <BackgroundTasks>
             <Task Type="timer" />
           </BackgroundTasks>

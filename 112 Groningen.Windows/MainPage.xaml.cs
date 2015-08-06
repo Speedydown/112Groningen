@@ -1,20 +1,14 @@
 ﻿using _112_Groningen.Common;
-using _112GroningenBackGroundTaskWP;
 using _112GroningenLogic;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
 using Windows.Storage;
-using Windows.System;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -32,6 +26,9 @@ namespace _112_Groningen
         public static MainPage Instance { get; private set; }
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
+
+        private string CurrentURL = string.Empty;
+        private bool StopRefresh = false;
 
         public MainPage()
         {
@@ -58,6 +55,20 @@ namespace _112_Groningen
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             await this.HandleData();
+
+            if (e.NavigationParameter != null && e.NavigationParameter.ToString() != "")
+            {
+                try
+                {
+                    await this.OpenNewsItem(e.NavigationParameter.ToString());
+
+                    return;
+                }
+                catch
+                {
+
+                }
+            }
         }
 
         public async Task HandleData(bool OverrideTimer = false)
@@ -89,7 +100,7 @@ namespace _112_Groningen
 
                     if (LastLoadedDT == null)
                     {
-                        NotificationHandler.Run();
+                        //NotificationHandler.Run();
                     }
 
                     ApplicationData applicationData = ApplicationData.Current;
@@ -104,6 +115,13 @@ namespace _112_Groningen
 
                     }
 
+                    if (News.Count > 0 && News.First().Articles.Count > 0)
+                    {
+                        await this.OpenNewsItem(News.First().Articles.First().URL);
+                    }
+
+                    Task RefreshTask = Task.Run(() => this.RefreshData());
+
                     LastLoadedDT = DateTime.Now;
                 }
                 catch (Exception)
@@ -115,9 +133,37 @@ namespace _112_Groningen
             LoadingControl.SetLoadingStatus(false);
         }
 
+        private async Task OpenNewsItem(string URL)
+        {
+            try
+            {
+                NewsItemControl.DataContext = null;
+                NewsItemLoadingControl.DisplayLoadingError(false);
+                NewsItemLoadingControl.SetLoadingStatus(true);
+
+                if (URL != null)
+                {
+                    CurrentURL = URL;
+                    Article newsItem = await Datahandler.GetArticleByURL(URL);
+                    NewsItemControl.DataContext = newsItem;
+                }
+            }
+            catch
+            {
+                NewsItemLoadingControl.DisplayLoadingError(true);
+            }
+            finally
+            {
+                NewsItemLoadingControl.SetLoadingStatus(false);
+            }
+
+            ArticleCounter.AddArticleCount();
+            Task t = Task.Run(() => Datahandler.PostArticle(URL));
+        }
+
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-           
+
         }
 
         #region NavigationHelper registration
@@ -147,31 +193,26 @@ namespace _112_Groningen
 
         #endregion
 
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (!Frame.Navigate(typeof(ItemPage), (e.ClickedItem as ArticleURL).URL))
+            await this.OpenNewsItem((e.ClickedItem as ArticleURL).URL);
+        }
+
+        private async Task RefreshData()
+        {
+            while (!StopRefresh)
             {
+                await Task.Delay(300000);
+                
+                List<NewsDay> News = (List<NewsDay>)await Datahandler.GetRegionalNews();
 
+                if ((News.Count > 0 && News.First().Articles.Count > 0 &&
+                    News.First().Articles.First().URL != (NewsLV.ItemsSource as List<NewsDay>).First().Articles.First().URL)
+                        || (NewsLV.ItemsSource as List<NewsDay>).Count == 0)
+                {
+                    NewsLV.ItemsSource = News;
+                }
             }
-        }
-
-        private async void GroningenButton_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("http://112groningen.nl"));
-        }
-
-        private async void PrivacyPolicyButton_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("http://wiezitwaarvandaag.nl/privacypolicy.aspx"));
-        }
-
-        private async void RefreshButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.RefreshButton.IsEnabled = false;
-            this.NewsLV.ItemsSource = null;
-            LastLoadedDT = null;
-            await this.HandleData();
-            this.RefreshButton.IsEnabled = true;
         }
     }
 }
