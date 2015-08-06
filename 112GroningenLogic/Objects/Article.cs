@@ -106,11 +106,26 @@ namespace _112GroningenLogic
             }
 
             this.Body = Body;
+
+            for (int i = 0; i < this.Body.Count; i++)
+            {
+                this.Body[i] = this.Body[i].Replace("&eacute", "é");
+            }
+
             this.ImageList = ImageList;
 
             if (MediaFile.Length != 0)
             {
                 this.YoutubeURL = new Uri(MediaFile);
+            }
+        }
+
+
+        public Brush TitleColorWindows
+        {
+            get
+            {
+                return new SolidColorBrush(Color.FromArgb((byte)255, (byte)89, (byte)126, (byte)170));
             }
         }
     }
