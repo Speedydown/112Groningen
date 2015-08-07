@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A055214E-2F67-4F68-B022-E454BA93DD15}</ProjectGuid>
+    <ProjectGuid>{9F2657E4-20DF-4F50-83E3-175B5041E0C3}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_112GroningenLogic</RootNamespace>
-    <AssemblyName>112GroningenLogic</AssemblyName>
+    <RootNamespace>_112GroningenBackGroundTaskW</RootNamespace>
+    <AssemblyName>112GroningenBackGroundTaskW</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,29 +34,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ArticleHandler.cs" />
-    <Compile Include="DataHandler.cs" />
-    <Compile Include="LatestArticles.cs" />
-    <Compile Include="NotificationDataHandler.cs" />
-    <Compile Include="Objects\Article.cs" />
-    <Compile Include="Objects\ArticleURL.cs" />
-    <Compile Include="Objects\NewsDay.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ToastHandler.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Speedydown.nl-API\WebCrawlerTools\WebCrawlerTools.csproj">
-      <Project>{ef41c761-8924-40f6-bc70-af1064796ed2}</Project>
-      <Name>WebCrawlerTools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Speedydown.nl-API\WRCHelperLibrary\WRCHelperLibrary.csproj">
-      <Project>{6f1a5ac4-c4ad-49c8-b37b-c541e09d5742}</Project>
-      <Name>WRCHelperLibrary</Name>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\112GroningenLogic\112GroningenLogic.csproj">
+      <Project>{a055214e-2f67-4f68-b022-e454ba93dd15}</Project>
+      <Name>112GroningenLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <TargetPlatform Include="Windows, Version=8.1" />
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
+    <TargetPlatform Include="Windows, Version=8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackgroundTask.cs" />
+    <Compile Include="NotificationHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

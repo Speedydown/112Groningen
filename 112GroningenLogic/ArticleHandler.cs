@@ -62,6 +62,38 @@ namespace _112GroningenLogic
                 }
             }
 
+            //while (true)
+            //{
+            //    try
+            //    {
+            //        string NewsParagraph = this.CleanContent(HTMLParserUtil.GetContentAndSubstringInput("<p align=\"left\">", "</p>", Source, out Source));
+
+            //        if (NewsParagraph.Length > 0)
+            //        {
+            //            Content.Add(NewsParagraph);
+            //        }
+            //    }
+            //    catch (Exception)
+            //    {
+            //        break;
+            //    }
+            //}
+
+            try
+            {
+                string NewsParagraph = this.CleanContent(HTMLParserUtil.GetContentAndSubstringInput("<p align=\"left\">", "<div id=\"artikel_videos\">", Source, out Source));
+
+                    if (NewsParagraph.Length > 0)
+                    {
+                        Content.Add(NewsParagraph);
+                    }
+                
+            }
+            catch
+            {
+
+            }
+
             string Youtube = "";
 
             try

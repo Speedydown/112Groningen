@@ -7,7 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "112 Groningen", "112 Gronin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "112GroningenLogic", "..\112GroningenLogic\112GroningenLogic.csproj", "{A055214E-2F67-4F68-B022-E454BA93DD15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "112GroningenBackGroundTaskW", "..\112GroningenBackGroundTaskW\112GroningenBackGroundTaskW.csproj", "{9F2657E4-20DF-4F50-83E3-175B5041E0C3}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\112 Groningen.Shared\112 Groningen.Shared.projitems*{bf62452c-c426-43a4-b86a-b277d6f42a32}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -43,6 +48,14 @@ Global
 		{A055214E-2F67-4F68-B022-E454BA93DD15}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A055214E-2F67-4F68-B022-E454BA93DD15}.Release|ARM.ActiveCfg = Release|Any CPU
 		{A055214E-2F67-4F68-B022-E454BA93DD15}.Release|x86.ActiveCfg = Release|Any CPU
+		{9F2657E4-20DF-4F50-83E3-175B5041E0C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F2657E4-20DF-4F50-83E3-175B5041E0C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F2657E4-20DF-4F50-83E3-175B5041E0C3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9F2657E4-20DF-4F50-83E3-175B5041E0C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9F2657E4-20DF-4F50-83E3-175B5041E0C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F2657E4-20DF-4F50-83E3-175B5041E0C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F2657E4-20DF-4F50-83E3-175B5041E0C3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9F2657E4-20DF-4F50-83E3-175B5041E0C3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

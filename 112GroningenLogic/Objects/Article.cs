@@ -86,7 +86,7 @@ namespace _112GroningenLogic
 
         public Article(string Title, string Date, string Author, string Location, IList<string> Body, IList<string> ImageList, string MediaFile)
         {
-            this.Author = (HTMLParserUtil.CleanHTMLString(Date).Trim() + ", " + HTMLParserUtil.CleanHTMLString(Author).Trim());
+            this.Author = (HTMLParserUtil.CleanHTMLString(Date).Trim() + ", " + HTMLParserUtil.CleanHTMLString(Author).Trim()).Replace("&amp", "&");
             this.Title = HTMLParserUtil.CleanHTMLString(Title);
             this.Location = Location;
 
@@ -109,7 +109,8 @@ namespace _112GroningenLogic
 
             for (int i = 0; i < this.Body.Count; i++)
             {
-                this.Body[i] = this.Body[i].Replace("&eacute", "é");
+                this.Body[i] = this.Body[i].Replace("&eacute", "é").Replace("&euml", "ë").Replace("&rsquo","\"").Replace("&lsquo", "\"").Replace("&euro", "€");
+                this.Body[i] = this.Body[i].Replace("  ", "\n").Replace("\n ", "\n");
             }
 
             this.ImageList = ImageList;

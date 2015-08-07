@@ -1,4 +1,5 @@
 ﻿using _112_Groningen.Common;
+using _112GroningenBackGroundTaskW;
 using _112GroningenLogic;
 using System;
 using System.Collections.Generic;
@@ -100,7 +101,7 @@ namespace _112_Groningen
 
                     if (LastLoadedDT == null)
                     {
-                        //NotificationHandler.Run();
+                        NotificationHandler.Run();
                     }
 
                     ApplicationData applicationData = ApplicationData.Current;
@@ -163,7 +164,7 @@ namespace _112_Groningen
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-
+            StopRefresh = true;
         }
 
         #region NavigationHelper registration

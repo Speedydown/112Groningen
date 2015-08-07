@@ -141,10 +141,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\HVZeeland\112GroningenBackGroundTaskWP\112GroningenBackGroundTaskWP.csproj">
-      <Project>{6845311d-eaac-4ed5-9ee4-c83fbb49a7ce}</Project>
-      <Name>112GroningenBackGroundTaskWP</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Speedydown.nl-API\WebCrawlerTools\WebCrawlerTools.csproj">
       <Project>{ef41c761-8924-40f6-bc70-af1064796ed2}</Project>
       <Name>WebCrawlerTools</Name>
@@ -156,6 +152,10 @@
     <ProjectReference Include="..\..\Speedydown.nl-API\XamlControlLibrary\XamlControlLibrary.csproj">
       <Project>{09f3efe7-ac3c-4189-90f1-c7bf9e01af96}</Project>
       <Name>XamlControlLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\112GroningenBackGroundTaskWP\112GroningenBackGroundTaskWP.csproj">
+      <Project>{6845311d-eaac-4ed5-9ee4-c83fbb49a7ce}</Project>
+      <Name>112GroningenBackGroundTaskWP</Name>
     </ProjectReference>
     <ProjectReference Include="..\112GroningenLogic\112GroningenLogic.csproj">
       <Project>{a055214e-2f67-4f68-b022-e454ba93dd15}</Project>
