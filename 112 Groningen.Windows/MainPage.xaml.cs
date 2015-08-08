@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WRCHelperLibrary;
 
 namespace _112_Groningen
 {
@@ -101,7 +102,7 @@ namespace _112_Groningen
 
                     if (LastLoadedDT == null)
                     {
-                        NotificationHandler.Run();
+                        NotificationHandler.Run("_112GroningenBackGroundTaskW.BackgroundTask", "_112GroningenBackGroundWorker");
                     }
 
                     ApplicationData applicationData = ApplicationData.Current;
