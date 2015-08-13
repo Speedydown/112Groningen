@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -160,7 +161,7 @@ namespace _112_Groningen
             }
 
             ArticleCounter.AddArticleCount();
-            Task t = Task.Run(() => Datahandler.PostArticle(URL));
+            Task t = Task.Run(() => Datahandler.PostArticle("http://speedydown-001-site2.smarterasp.net/api.ashx?Groningen=" + URL));
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -204,15 +205,25 @@ namespace _112_Groningen
         {
             while (!StopRefresh)
             {
-                await Task.Delay(300000);
-                
+                await Task.Delay(150000);
+
                 List<NewsDay> News = (List<NewsDay>)await Datahandler.GetRegionalNews();
 
-                if ((News.Count > 0 && News.First().Articles.Count > 0 &&
-                    News.First().Articles.First().URL != (NewsLV.ItemsSource as List<NewsDay>).First().Articles.First().URL)
-                        || (NewsLV.ItemsSource as List<NewsDay>).Count == 0)
+                try
                 {
-                    NewsLV.ItemsSource = News;
+                    Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                    {
+                        if ((News.Count > 0 && News.First().Articles.Count > 0 &&
+                            News.First().Articles.First().URL != (NewsLV.ItemsSource as List<NewsDay>).First().Articles.First().URL)
+                                || (NewsLV.ItemsSource as List<NewsDay>).Count == 0)
+                        {
+                            NewsLV.ItemsSource = News;
+                        }
+                    });
+                }
+                catch
+                {
+
                 }
             }
         }

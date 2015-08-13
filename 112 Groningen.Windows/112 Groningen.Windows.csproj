@@ -18,7 +18,8 @@
     <PackageCertificateKeyFile>112 Groningen.Windows_StoreKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>5CC00A7941A81DD84BB9E4F1F50563A20C40DF2B</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>61EF637D13554302089F268CC5E7A359B9A3F1CA</PackageCertificateThumbprint>
+    <AppxBundle>Always</AppxBundle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -143,8 +144,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="112 Groningen.Windows_StoreKey.pfx" />
-    <None Include="112 Groningen.Windows_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\BadgeLogo.scale-100.png" />
@@ -161,6 +160,8 @@
     <Content Include="Assets\StoreLogo.scale-180.png" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-180.png" />
+    <None Include="112 Groningen.Windows_StoreKey.pfx" />
+    <None Include="112 Groningen.Windows_TemporaryKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>

@@ -36,6 +36,9 @@ namespace _112GroningenLogic
                     return ArticleURL;
                 }
 
+                //Test data
+                //LastURL = News[1].Articles[2].URL;
+
                 int NotificationCounter = 0;
 
                 foreach (NewsDay n in News)
