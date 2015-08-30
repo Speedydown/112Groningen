@@ -196,7 +196,8 @@
     <MainPackageIdentityName>52891Speedydown.Joop</MainPackageIdentityName>
     <MainPackageIdentityName>52891Speedydown.LeeuwarderCourant</MainPackageIdentityName>
     <MainPackageIdentityName>52891Speedydown.leftovers</MainPackageIdentityName>
-    <MainPackageIdentityName>52891Speedydown.Pownews</MainPackageIdentityName>
+    <MainPackageIdentityName>52891Speedydown.PowNed</MainPackageIdentityName>
+    <MainPackageIdentityName>52891Speedydown.SpreekwoordenApp</MainPackageIdentityName>
     <MainPackageIdentityName>52891Speedydown.Supermarktaanbiedingen</MainPackageIdentityName>
     <MainPackageIdentityName>52891Speedydown.Wldnet</MainPackageIdentityName>
     <MainPackageIdentityName>52891Speedydown.WieZitWaarVandaag</MainPackageIdentityName>
@@ -205,17 +206,17 @@
     <PackageInfo>
       <OsMinVersion>6.3.1.0</OsMinVersion>
       <PackageArchitecture>Neutral</PackageArchitecture>
-      <PackageMaxArchitectureVersion>2015.807.1614.0</PackageMaxArchitectureVersion>
+      <PackageMaxArchitectureVersion>2015.813.1906.0</PackageMaxArchitectureVersion>
     </PackageInfo>
     <PackageInfo>
       <OsMinVersion>6.3.1.0</OsMinVersion>
       <PackageArchitecture>Neutral</PackageArchitecture>
-      <PackageMaxArchitectureVersion>2015.807.1614.0</PackageMaxArchitectureVersion>
+      <PackageMaxArchitectureVersion>2015.813.1906.0</PackageMaxArchitectureVersion>
     </PackageInfo>
     <PackageInfo>
       <OsMinVersion>6.3.1.0</OsMinVersion>
       <PackageArchitecture>Neutral</PackageArchitecture>
-      <PackageMaxArchitectureVersion>2015.807.1614.0</PackageMaxArchitectureVersion>
+      <PackageMaxArchitectureVersion>2015.813.1906.0</PackageMaxArchitectureVersion>
     </PackageInfo>
   </PackageInfoList>
 </StoreAssociation>
