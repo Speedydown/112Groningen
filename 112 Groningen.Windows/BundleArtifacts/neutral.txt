@@ -1,3 +1,3 @@
-MainPackage=C:\Users\Teake\Documents\GitHub\112Groningen\112 Groningen.Windows\bin\Release\112 Groningen.Windows_1.1.0.2_Bundle\112 Groningen.Windows_1.1.0.2_AnyCPU.appx
-SymbolPackage=C:\Users\Teake\Documents\GitHub\112Groningen\112 Groningen.Windows\AppPackages\112 Groningen.Windows_1.1.0.2_Test\112 Groningen.Windows_1.1.0.2_AnyCPU.appxsym
-ResourcePack=C:\Users\Teake\Documents\GitHub\112Groningen\112 Groningen.Windows\bin\Release\112 Groningen.Windows_1.1.0.2_Bundle\112 Groningen.Windows_1.1.0.2_scale-180.appx
+MainPackage=C:\Users\Teake\Documents\GitHub\112Groningen\112 Groningen.Windows\bin\Release\112 Groningen.Windows_1.1.0.3_Bundle\112 Groningen.Windows_1.1.0.3_AnyCPU.appx
+SymbolPackage=C:\Users\Teake\Documents\GitHub\112Groningen\112 Groningen.Windows\AppPackages\112 Groningen.Windows_1.1.0.3_Test\112 Groningen.Windows_1.1.0.3_AnyCPU.appxsym
+ResourcePack=C:\Users\Teake\Documents\GitHub\112Groningen\112 Groningen.Windows\bin\Release\112 Groningen.Windows_1.1.0.3_Bundle\112 Groningen.Windows_1.1.0.3_scale-180.appx
