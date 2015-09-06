@@ -103,7 +103,7 @@ namespace _112_Groningen
 
                     if (LastLoadedDT == null)
                     {
-                        NotificationHandler.Run("_112GroningenBackGroundTaskW.BackgroundTask", "_112GroningenBackGroundWorker");
+                        NotificationHandler.Run("_112GroningenBackGroundTaskW.BackgroundTask", "_112GroningenBackGroundWorker", 15);
                     }
 
                     ApplicationData applicationData = ApplicationData.Current;

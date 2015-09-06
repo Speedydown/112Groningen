@@ -16,8 +16,8 @@
         </Grid.ColumnDefinitions>
         <UI:AdControl
             x:Name="adControl"
-          ApplicationId="8e57ba04-61da-4d73-9bc7-265b4c98fd18 " 
-          AdUnitId="11530654" 
+          ApplicationId="c06123d2-40ca-447e-9060-e6629da48f12" 
+          AdUnitId="11530791" 
           HorizontalAlignment="Center" 
           Height="90" Grid.Column="1"
           IsAutoRefreshEnabled="True" 
