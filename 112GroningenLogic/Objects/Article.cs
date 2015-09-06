@@ -109,7 +109,7 @@ namespace _112GroningenLogic
 
             for (int i = 0; i < this.Body.Count; i++)
             {
-                this.Body[i] = this.Body[i].Replace("&eacute", "é").Replace("&euml", "ë").Replace("&rsquo","\"").Replace("&lsquo", "\"").Replace("&euro", "€");
+                this.Body[i] = this.Body[i].Replace("&eacute", "é").Replace("&euml", "ë").Replace("&rsquo","\"").Replace("&lsquo", "\"").Replace("&euro", "€").Replace("&#39", "'");
                 this.Body[i] = this.Body[i].Replace("  ", "\n").Replace("\n ", "\n");
             }
 

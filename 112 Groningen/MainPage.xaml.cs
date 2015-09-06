@@ -90,7 +90,7 @@ namespace _112_Groningen
 
                     if (LastLoadedDT == null)
                     {
-                        NotificationHandler.Run("_112GroningenBackGroundTaskWP.BackgroundTask", "GroningenUpdateService");
+                        NotificationHandler.Run("_112GroningenBackGroundTaskWP.BackgroundTask", "GroningenUpdateService", 30);
                     }
 
                     ApplicationData applicationData = ApplicationData.Current;
