@@ -1,14 +1,11 @@
-﻿using System;
+﻿using BaseLogic.HtmlUtil;
+using BaseLogic.Xaml_Controls.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using WebCrawlerTools;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
-using WRCHelperLibrary;
 
 namespace _112GroningenLogic
 {

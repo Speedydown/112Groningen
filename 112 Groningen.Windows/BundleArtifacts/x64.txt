@@ -1,0 +1,2 @@
+MainPackage=C:\Users\speed\Documents\GitHub\112Groningen\112 Groningen.Windows\bin\x64\Release\112 Groningen.Windows_1.1.0.4_x64.appx
+SymbolPackage=C:\Users\speed\Documents\GitHub\112Groningen\112 Groningen.Windows\AppPackages\112 Groningen.Windows_1.1.0.4_Test\112 Groningen.Windows_1.1.0.4_x64.appxsym

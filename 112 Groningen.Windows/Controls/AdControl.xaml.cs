@@ -24,7 +24,7 @@ namespace HVZeeland.Controls
 
         private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            AdGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            AdGrid.Visibility = Visibility.Collapsed;
         }
     }
 }

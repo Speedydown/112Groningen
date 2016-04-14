@@ -1,23 +1,11 @@
 ﻿using _112_Groningen.Common;
 using _112GroningenLogic;
+using BaseLogic.ClientIDHandler;
+using BaseLogic.Utils;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using WebCrawlerTools;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 namespace _112_Groningen
@@ -97,7 +85,7 @@ namespace _112_Groningen
             ArticleCounter.AddArticleCount();
             if (e.NavigationParameter != null)
             {
-                Task t = Task.Run(() => Datahandler.PostArticle("http://speedydown-001-site2.smarterasp.net/api.ashx?Groningen=" + (string)e.NavigationParameter));
+                Task Notifier = Task.Run(async () => await ClientIDHandler.instance.PostAppStats(ClientIDHandler.AppName._112Groningen));
             }
         }
 

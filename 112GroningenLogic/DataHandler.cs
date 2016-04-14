@@ -1,8 +1,6 @@
-﻿using System;
+﻿using BaseLogic.HtmlUtil;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WebCrawlerTools;
 using Windows.Foundation;
 
 namespace _112GroningenLogic

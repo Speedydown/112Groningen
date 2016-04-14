@@ -1,0 +1,4 @@
+MainPackage=C:\Users\speed\Documents\GitHub\112Groningen\112 Groningen.Windows\bin\ARM\Release\112 Groningen.Windows_1.1.0.4_ARM.appx
+SymbolPackage=C:\Users\speed\Documents\GitHub\112Groningen\112 Groningen.Windows\AppPackages\112 Groningen.Windows_1.1.0.4_Test\112 Groningen.Windows_1.1.0.4_ARM.appxsym
+ResourcePack=C:\Users\speed\Documents\GitHub\112Groningen\112 Groningen.Windows\bin\ARM\Release\112 Groningen.Windows_1.1.0.4_language-nl.appx
+ResourcePack=C:\Users\speed\Documents\GitHub\112Groningen\112 Groningen.Windows\bin\ARM\Release\112 Groningen.Windows_1.1.0.4_scale-180.appx

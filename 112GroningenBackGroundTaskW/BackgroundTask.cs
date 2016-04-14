@@ -1,14 +1,13 @@
 ﻿using _112GroningenLogic;
+using BaseLogic.Notifications;
+using BaseLogic.Xaml_Controls.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.Data.Xml.Dom;
 using Windows.Storage;
 using Windows.UI.Notifications;
-using WRCHelperLibrary;
 
 namespace _112GroningenBackGroundTaskW
 {
@@ -34,9 +33,9 @@ namespace _112GroningenBackGroundTaskW
 
         private void CreateTiles(IList<INewsLink> Content, int Counter)
         {
-            XmlDocument RectangleTile = TileXmlHandler.CreateRectangleTile(TileUpdateManager.GetTemplateContent(TileTemplateType.TileWide310x150Text01), Content, Counter, string.Empty, string.Empty);
+            XmlDocument RectangleTile = TileXmlHandler.CreateRectangleTile(TileUpdateManager.GetTemplateContent(TileTemplateType.TileWide310x150Text01), Content, Counter, "ms-appx:///assets/Logo.scale-100.png", "112Groningen.nl", "Laatste nieuws");
             XmlDocument SquareTile = TileXmlHandler.CreateLargeSquareTile(TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare310x310Text01), Content);
-            XmlDocument SmallTile = TileXmlHandler.CreateSquareTile(TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare150x150PeekImageAndText03), Content, "ms-appx:///assets/Logo.scale-100.png", "112Groningen.nl");
+            XmlDocument SmallTile = TileXmlHandler.CreateSquareTile(TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare150x150PeekImageAndText03), Content, "ms-appx:///assets/Logo.scale-100.png", "112Groningen.nl", "Laatste nieuws");
 
             TileXmlHandler.CreateTileUpdate(new XmlDocument[] { RectangleTile, SquareTile, SmallTile });
         }

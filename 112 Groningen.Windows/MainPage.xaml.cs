@@ -1,25 +1,16 @@
 ﻿using _112_Groningen.Common;
-using _112GroningenBackGroundTaskW;
 using _112GroningenLogic;
+using BaseLogic.ClientIDHandler;
+using BaseLogic.Notifications;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Notifications;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using WRCHelperLibrary;
 
 namespace _112_Groningen
 {
@@ -161,7 +152,7 @@ namespace _112_Groningen
             }
 
             ArticleCounter.AddArticleCount();
-            Task t = Task.Run(() => Datahandler.PostArticle("http://speedydown-001-site2.smarterasp.net/api.ashx?Groningen=" + URL));
+            Task Notifier = Task.Run(async () => await ClientIDHandler.instance.PostAppStats(ClientIDHandler.AppName._112Groningen));
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -211,7 +202,7 @@ namespace _112_Groningen
 
                 try
                 {
-                    Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
                         if ((News.Count > 0 && News.First().Articles.Count > 0 &&
                             News.First().Articles.First().URL != (NewsLV.ItemsSource as List<NewsDay>).First().Articles.First().URL)

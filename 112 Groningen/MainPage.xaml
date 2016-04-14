@@ -5,7 +5,7 @@
     xmlns:local="using:_112_Groningen"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:CLib="using:XamlControlLibrary"
+    xmlns:CLib="using:BaseLogic.Xaml_Controls"
     mc:Ignorable="d"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     Background="#FF597EAA">
@@ -30,7 +30,7 @@
                     <StackPanel HorizontalAlignment="Stretch" Background="White" >
                         <Grid Background="#FF597EAA">
                             <TextBlock
-                                        Margin="9,0,19,0"
+                                        Margin="9,0,19,5"
                                     Text="{Binding Header}"
                                     TextWrapping="Wrap"
                                     
@@ -87,7 +87,7 @@
     </Grid>
 
     <Page.BottomAppBar>
-        <CommandBar Background="#FF597EAA" Foreground="White">
+        <CommandBar Background="#FF597EAA" Foreground="White" ClosedDisplayMode="Minimal">
             <AppBarButton x:Uid="GroningenButton" x:Name="GroningenButton" Label="Website" Icon="World" Click="GroningenButton_Click" />
             <AppBarButton x:Uid="RefreshButton" x:Name="RefreshButton" Label="Vernieuwen" Icon="Refresh" Click="RefreshButton_Click" />
             <CommandBar.SecondaryCommands>

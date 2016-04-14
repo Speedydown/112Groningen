@@ -50,11 +50,11 @@ namespace _112_Groningen
 
         private static async Task ShowRateDialog()
         {
-            var messageDialog = new Windows.UI.Popups.MessageDialog("Wij bieden 112Groningen kostenloos aan en we zouden het op prijs stellen als u de 112Groningen app een positieve review geeft.", "Bedankt");
+            var messageDialog = new MessageDialog("Wij bieden 112Groningen kostenloos aan en we zouden het op prijs stellen als u de 112Groningen app een positieve review geeft.", "Bedankt");
             messageDialog.Commands.Add(
-            new Windows.UI.Popups.UICommand("Review", CommandInvokedHandler));
+            new UICommand("Review", CommandInvokedHandler));
             messageDialog.Commands.Add(
-            new Windows.UI.Popups.UICommand("Annuleren", CommandInvokedHandler));
+            new UICommand("Annuleren", CommandInvokedHandler));
             await messageDialog.ShowAsync();
         }
 

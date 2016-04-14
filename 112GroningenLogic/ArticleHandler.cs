@@ -1,9 +1,9 @@
-﻿using System;
+﻿using BaseLogic.HtmlUtil;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebCrawlerTools;
 
 namespace _112GroningenLogic
 {
@@ -58,26 +58,29 @@ namespace _112GroningenLogic
                 }
                 catch (Exception)
                 {
-                    break;
+                    try
+                    {
+                        Source = Source.Substring(Source.IndexOf("<p class=\"introductie\">"));
+                        string NewsParagraph = this.CleanContent(HTMLParserUtil.GetContentAndSubstringInput("<p class=\"introductie\">", "</p>", Source, out Source));
+
+                        if (NewsParagraph.Length > 0)
+                        {
+                            Content.Add(NewsParagraph);
+                        }
+
+                        NewsParagraph = this.CleanContent(HTMLParserUtil.GetContentAndSubstringInput("<div>", "</div>", Source, out Source));
+
+                        if (NewsParagraph.Length > 0)
+                        {
+                            Content.Add(NewsParagraph);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        break;
+                    }
                 }
             }
-
-            //while (true)
-            //{
-            //    try
-            //    {
-            //        string NewsParagraph = this.CleanContent(HTMLParserUtil.GetContentAndSubstringInput("<p align=\"left\">", "</p>", Source, out Source));
-
-            //        if (NewsParagraph.Length > 0)
-            //        {
-            //            Content.Add(NewsParagraph);
-            //        }
-            //    }
-            //    catch (Exception)
-            //    {
-            //        break;
-            //    }
-            //}
 
             try
             {
@@ -126,10 +129,14 @@ namespace _112GroningenLogic
 
         private string CleanContent(string Content)
         {
-            if (Content.Contains("<strong>"))
-            {
-                Content = Content.Insert(Content.IndexOf("<strong>"), "\n\n");
-            }
+            Content = Content.Replace("</p><p>", " ");
+            Content = Content.Replace(" &nbsp; ", "\n\n");
+            Content = Content.Replace("&nbsp;", " ");
+            Content = Content.Replace("&nbsp; ", " ");
+            Content = Content.Replace("<p><strong>", " ");
+            Content = Content.Replace("</strong></p>", " ");
+            Content = Content.Replace("   ", " ");
+            Content = Content.Replace("  ", " ");
 
             Content = HTMLParserUtil.CleanHTMLString(Content);
             Content = HTMLParserUtil.CleanHTMLTagsFromString(Content);

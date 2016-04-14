@@ -1,4 +1,5 @@
 ﻿using _112_Groningen.Common;
+using BaseLogic.ExceptionHandler;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,8 +27,15 @@ namespace _112_Groningen
 
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += this.OnSuspending;
+            InitializeComponent();
+            Suspending += OnSuspending;
+            UnhandledException += App_UnhandledException;
+        }
+
+        void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            Task t = ExceptionHandler.instance.PostException(new AppException(e.Exception), (int)BaseLogic.ClientIDHandler.ClientIDHandler.AppName._112Groningen);
         }
 
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
