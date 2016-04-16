@@ -1,5 +1,6 @@
 ﻿using _112_Groningen.Common;
 using _112GroningenLogic;
+using BaseLogic.ArticleCounter;
 using BaseLogic.ClientIDHandler;
 using BaseLogic.Notifications;
 using System;
@@ -151,7 +152,7 @@ namespace _112_Groningen
                 NewsItemLoadingControl.SetLoadingStatus(false);
             }
 
-            ArticleCounter.AddArticleCount();
+            await ArticleCounter.AddArticleCount("Wij bieden 112Groningen kostenloos aan en we zouden het op prijs stellen als u de 112Groningen app een positieve review geeft.", "Bedankt");
             Task Notifier = Task.Run(async () => await ClientIDHandler.instance.PostAppStats(ClientIDHandler.AppName._112Groningen));
         }
 
